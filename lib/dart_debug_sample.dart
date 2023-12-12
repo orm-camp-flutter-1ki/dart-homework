@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class YukymController {
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   late String nowTime;
 
