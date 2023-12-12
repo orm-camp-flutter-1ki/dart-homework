@@ -54,7 +54,7 @@ class YukymController {
       return timeDataOne.first.ty6;
     } else if (nowTime.hour >= 12 && nowTime.hour < 14) {
       return timeDataOne.first.ty7;
-    } else if (nowTime.hour > 14 && nowTime.hour < 16) {
+    } else if (nowTime.hour >= 14 && nowTime.hour < 16) {
       return timeDataOne.first.ty8;
     } else if (nowTime.hour >= 16 && nowTime.hour < 18) {
       return timeDataOne.first.ty9;
