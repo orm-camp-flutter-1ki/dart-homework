@@ -1,8 +1,12 @@
 import 'package:intl/intl.dart';
+import 'dart_debug_sample.dart';
 
 class YukymController {
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  //String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+  // 데이트 타임 공식문서을 확인하면  mm 는 분을 의미하고 MM 는 월을 의미한다.
 
   late String nowTime;
 
@@ -37,28 +41,34 @@ class YukymController {
   String getTyB() {
     List<YukymTimeModel> timeDataOne = _getTimeDataOne(nowDate);
     String result = timeDataOne.first.ty12;
-
+      // and : && a와 b 둘다 true 면 true
+     //  or: || a 또는 b 둘중하나만 true 전체 true다 .
+     // 두시간마다 조건을 주도록 되어있는데 2시~4시 와 14~16시 빠진게 있고  return 마지막이 ty10 밑에 모델 클레스 보면 마지막 ty12 다 .
     final nowTime = DateTime.now();
-    if (nowTime.hour >= 0 || nowTime.hour < 2) {
+    if (nowTime.hour >= 0 && nowTime.hour < 2) {
       return timeDataOne.first.ty1;
-    } else if (nowTime.hour >= 4 || nowTime.hour < 6) {
+    }else if (nowTime.hour >= 2 && nowTime.hour < 4) {
       return timeDataOne.first.ty2;
-    } else if (nowTime.hour >= 6 || nowTime.hour < 8) {
+    } else if (nowTime.hour >= 4 && nowTime.hour < 6) {
       return timeDataOne.first.ty3;
-    } else if (nowTime.hour >= 8 || nowTime.hour < 10) {
+    } else if (nowTime.hour >= 6 && nowTime.hour < 8) {
       return timeDataOne.first.ty4;
-    } else if (nowTime.hour >= 10 || nowTime.hour < 12) {
+    } else if (nowTime.hour >= 8 && nowTime.hour < 10) {
       return timeDataOne.first.ty5;
-    } else if (nowTime.hour >= 12 || nowTime.hour < 14) {
+    } else if (nowTime.hour >= 10 && nowTime.hour < 12) {
       return timeDataOne.first.ty6;
-    } else if (nowTime.hour >= 16 || nowTime.hour < 18) {
+    } else if (nowTime.hour >= 12 && nowTime.hour < 14) {
       return timeDataOne.first.ty7;
-    } else if (nowTime.hour >= 18 || nowTime.hour < 20) {
+    } else if (nowTime.hour >= 14 && nowTime.hour < 16) {
       return timeDataOne.first.ty8;
-    } else if (nowTime.hour >= 20 || nowTime.hour < 22) {
+    } else if (nowTime.hour >= 16 && nowTime.hour < 18) {
       return timeDataOne.first.ty9;
-    } else if (nowTime.hour >= 22 || nowTime.hour < 24) {
+    } else if (nowTime.hour >= 18 && nowTime.hour < 20) {
       return timeDataOne.first.ty10;
+    } else if (nowTime.hour >= 20 && nowTime.hour < 22) {
+      return timeDataOne.first.ty11;
+    } else if (nowTime.hour >= 22 && nowTime.hour < 24) {
+      return timeDataOne.first.ty12;
     }
 
     return result;
@@ -86,4 +96,11 @@ class YukymTimeModel {
   String ty10 = '갑자10국';
   String ty11 = '갑자11국';
   String ty12 = '갑자12국';
+}
+
+
+void main() {
+  YukymController yukymController = YukymController();
+  print(yukymController.getTyA()); // 해당 월에 맞는 자시의 국 표시
+  print(yukymController.getTyB()); // 해당 시간에 맞는 자시의 국 표시
 }
