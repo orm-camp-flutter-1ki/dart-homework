@@ -7,21 +7,9 @@ class YukymController {
   late String nowTime;
 
   // 해당 월에 맞는 자시의 국 표시
-  String getTyA() {
-      final month = nowDate.substring(5, 7);
-      if (month == '01' || month == '02') {
-        return '경오1국';
-      } else if (month == '03' || month == '04') {
-        return '경오2국';
-      } else if (month == '05' || month == '06') {
-        return '경오3국';
-      } else if (month == '07' || month == '08') {
-        return '경오4국';
-      } else if (month == '09' || month == '10') {
-        return '경오5국';
-      } else {
-        return '경오6국';
-      }
+  String getTyA({DateTime? date}) {
+    final month = date?.month ?? DateTime.now().month;
+    return '경오${(month / 2).ceil()}국';
   }
 
   String getTyB() {
