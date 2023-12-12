@@ -6,13 +6,8 @@ class YukymController {
 
   late String nowTime;
 
-  // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
+  // 해당 월에 맞는 자시의 국 표시
   String getTyA() {
-    List<YukymTimeModel> timeDataOne = _getTimeDataOne(nowDate);
-
-    if (timeDataOne.isNotEmpty) {
-      nowTime = timeDataOne.first.ty1;
-
       final month = nowDate.substring(5, 7);
       if (month == '01' || month == '02') {
         return '경오1국';
@@ -24,14 +19,9 @@ class YukymController {
         return '경오4국';
       } else if (month == '09' || month == '10') {
         return '경오5국';
-      } else if (month == '11' || month == '12') {
+      } else {
         return '경오6국';
       }
-      return nowTime;
-    } else {
-      // Handle the case when the list is empty
-      return '경오7국'; // Or any other appropriate action
-    }
   }
 
   String getTyB() {
