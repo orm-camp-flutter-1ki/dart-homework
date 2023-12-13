@@ -1,5 +1,6 @@
 class YukymController {
   // DateTime.parse(_userData.value!.selectDate)
+
   DateTime now = DateTime.now();
 
   // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
