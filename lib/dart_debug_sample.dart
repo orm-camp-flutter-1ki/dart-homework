@@ -2,7 +2,9 @@ import 'package:intl/intl.dart';
 
 class YukymController {
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+
+  // DateFormat의 형식을 정의할 때 mm이 아닌 MM으로 써야 함
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   late String nowTime;
 
