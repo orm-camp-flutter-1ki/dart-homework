@@ -1,89 +1,109 @@
-import 'package:intl/intl.dart';
 
-class YukymController {
+
+abstract class YukymTimeModel {
+  final List<String> _tyA = [
+    '경오1국',
+    '경오2국',
+    '경오3국',
+    '경오4국',
+    '경오5국',
+    '경오6국',
+  ];
+  final List<String> _tyB = [
+    '갑자1국',
+    '갑자2국',
+    '갑자3국',
+    '갑자4국',
+    '갑자5국',
+    '갑자6국',
+    '갑자7국',
+    '갑자8국',
+    '갑자9국',
+    '갑자10국',
+    '갑자11국',
+    '갑자12국',
+  ];
+
+  YukymTimeModel({tyA, tyB});
+
+  List<String> get tyB => _tyB;
+  List<String> get tyA => _tyA;
+}
+
+class YukymController extends YukymTimeModel {
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
 
-  late String nowTime;
+  YukymController();
 
-  // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
+  DateTime nowDateTime = DateTime.now();
+
   String getTyA() {
-    List<YukymTimeModel> timeDataOne = _getTimeDataOne(nowDate);
-
-    if (timeDataOne.isNotEmpty) {
-      nowTime = timeDataOne.first.ty1;
-
-      final month = nowDate.substring(5, 7);
-      if (month == '01' || month == '02') {
-        return '경오1국';
-      } else if (month == '03' || month == '04') {
-        return '경오2국';
-      } else if (month == '05' || month == '06') {
-        return '경오3국';
-      } else if (month == '07' || month == '08') {
-        return '경오4국';
-      } else if (month == '09' || month == '10') {
-        return '경오5국';
-      } else if (month == '11' || month == '12') {
-        return '경오6국';
-      }
-      return nowTime;
-    } else {
-      // Handle the case when the list is empty
-      return '경오7국'; // Or any other appropriate action
+    final month = nowDateTime.month.toString();
+    String result = '';
+    switch (month) {
+      case ('01' || '02'):
+        result = tyA[0];
+        break;
+      case ('03' || '04'):
+        result = tyA[1];
+        break;
+      case ('05' || '06'):
+        result = tyA[2];
+        break;
+      case ('07' || '08'):
+        result = tyA[3];
+        break;
+      case ('09' || '10'):
+        result = tyA[4];
+        break;
+      case ('11' || '12'):
+        result = tyA[5];
+        break;
     }
-  }
-
-  String getTyB() {
-    List<YukymTimeModel> timeDataOne = _getTimeDataOne(nowDate);
-    String result = timeDataOne.first.ty12;
-
-    final nowTime = DateTime.now();
-    if (nowTime.hour >= 0 || nowTime.hour < 2) {
-      return timeDataOne.first.ty1;
-    } else if (nowTime.hour >= 4 || nowTime.hour < 6) {
-      return timeDataOne.first.ty2;
-    } else if (nowTime.hour >= 6 || nowTime.hour < 8) {
-      return timeDataOne.first.ty3;
-    } else if (nowTime.hour >= 8 || nowTime.hour < 10) {
-      return timeDataOne.first.ty4;
-    } else if (nowTime.hour >= 10 || nowTime.hour < 12) {
-      return timeDataOne.first.ty5;
-    } else if (nowTime.hour >= 12 || nowTime.hour < 14) {
-      return timeDataOne.first.ty6;
-    } else if (nowTime.hour >= 16 || nowTime.hour < 18) {
-      return timeDataOne.first.ty7;
-    } else if (nowTime.hour >= 18 || nowTime.hour < 20) {
-      return timeDataOne.first.ty8;
-    } else if (nowTime.hour >= 20 || nowTime.hour < 22) {
-      return timeDataOne.first.ty9;
-    } else if (nowTime.hour >= 22 || nowTime.hour < 24) {
-      return timeDataOne.first.ty10;
-    }
-
     return result;
   }
 
-  List<YukymTimeModel> _getTimeDataOne(String nowDate) {
-    List<YukymTimeModel> timeDataOne = [];
-    for (int i = 0; i < 24; i++) {
-      timeDataOne.add(YukymTimeModel());
+  String getTyB() {
+    final hour = nowDateTime.hour.toInt();
+    String result = '';
+    switch (hour) {
+      case >= 0 && < 2:
+        result = tyB[0];
+        break;
+      case >= 2 && < 4:
+        result = tyB[1];
+        break;
+      case >= 4 && < 6:
+        result = tyB[2];
+        break;
+      case >= 6 && < 8:
+        result = tyB[3];
+        break;
+      case >= 8 && < 10:
+        result = tyB[4];
+        break;
+      case >= 10 && < 12:
+        result = tyB[5];
+        break;
+      case >= 12 && < 14:
+        result = tyB[6];
+        break;
+      case >= 14 && < 16:
+        result = tyB[7];
+        break;
+      case >= 16 && < 18:
+        result = tyB[8];
+        break;
+      case >= 18 && < 20:
+        result = tyB[9];
+        break;
+      case >= 20 && < 22:
+        result = tyB[10];
+        break;
+      case >= 22 && < 24:
+        result = tyB[11];
+        break;
     }
-    return timeDataOne;
+    return result;
   }
-}
-
-class YukymTimeModel {
-  String ty1 = '갑자1국';
-  String ty2 = '갑자2국';
-  String ty3 = '갑자3국';
-  String ty4 = '갑자4국';
-  String ty5 = '갑자5국';
-  String ty6 = '갑자6국';
-  String ty7 = '갑자7국';
-  String ty8 = '갑자8국';
-  String ty9 = '갑자9국';
-  String ty10 = '갑자10국';
-  String ty11 = '갑자11국';
-  String ty12 = '갑자12국';
 }
